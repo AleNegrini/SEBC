@@ -1,8 +1,4 @@
 # MariaDB Master Slave configuration
-On my cluster: 
-amsterdam host is the master 
-berlin host is the slave
-
 ```
 MariaDB [(none)]> SHOW SLAVE STATUS \G
 *************************** 1. row ***************************
@@ -47,4 +43,45 @@ Master_SSL_Verify_Server_Cert: No
   Replicate_Ignore_Server_Ids:
              Master_Server_Id: 1
 1 row in set (0.00 sec)
+```
+
+Double check if replicates correctly databases:
+```
+MASTER
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| amon               |
+| metastore          |
+| mysql              |
+| nav                |
+| navms              |
+| performance_schema |
+| rman               |
+| sentry             |
++--------------------+
+9 rows in set (0.00 sec)
+```
+
+```
+SLAVE
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| amon               |
+| metastore          |
+| mysql              |
+| nav                |
+| navms              |
+| performance_schema |
+| rman               |
+| sentry             |
++--------------------+
+9 rows in set (0.00 sec)
 ```
