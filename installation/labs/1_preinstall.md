@@ -37,3 +37,10 @@ Disable SELinux:
 + SELINUX=disabled (add this line)
 ```
 Save and reboot the machine
+
+## Disable IPv6
+```
+[root@amsterdam cloudera] vi /etc/sysctl.conf
++ net.ipv6.conf.all.disable_ipv6 = 1 (add this line)
+```
+Save and reboot the machine
