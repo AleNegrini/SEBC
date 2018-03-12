@@ -271,8 +271,8 @@ Authoritative answers can be found from:
 ## nscd
 ```
 [root@amsterdam transparent_hugepage]# sudo yum install nscd
-[root@amsterdam transparent_hugepage]# service nscd start
-[root@amsterdam transparent_hugepage]# chkconfig nscd on
+[root@amsterdam transparent_hugepage]# service nscd start (start it)
+[root@amsterdam transparent_hugepage]# chkconfig nscd on (run it at reboot)
 Note: Forwarding request to 'systemctl enable nscd.service'.
 Created symlink from /etc/systemd/system/multi-user.target.wants/nscd.service to /usr/lib/systemd/system/nscd.service.
 Created symlink from /etc/systemd/system/sockets.target.wants/nscd.socket to /usr/lib/systemd/system/nscd.socket.
@@ -305,5 +305,23 @@ user    0m0.004s
 sys     0m0.004s
 ```
 
+## ntpd
+```
+[root@amsterdam transparent_hugepage]# service ntpd start (start it)
+Redirecting to /bin/systemctl start ntpd.service
+[root@amsterdam transparent_hugepage]# chkconfig ntpd on (to run it at reboot)
+Note: Forwarding request to 'systemctl enable ntpd.service'.
+```
+Google Cloud machines have already a configuration file with a default server that I will use. The default server specified in the __/etc/ntp.conf__ file is 169.254.169.254.
+
+Syncronize the node
+```
+[root@amsterdam transparent_hugepage]# ntpdate -u 169.254.169.254
+12 Mar 13:39:09 ntpdate[4160]: adjust time server 169.254.169.254 offset -0.010787 sec
+```
+Syncronize the system clock
+```
+hwclock --systohc
+```
 
 These steps were then applied to all the hosts
