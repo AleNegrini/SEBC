@@ -266,6 +266,44 @@ Non-authoritative answer:
 
 Authoritative answers can be found from:
 
-
 ```
+
+## nscd
+```
+[root@amsterdam transparent_hugepage]# sudo yum install nscd
+[root@amsterdam transparent_hugepage]# service nscd start
+[root@amsterdam transparent_hugepage]# chkconfig nscd on
+Note: Forwarding request to 'systemctl enable nscd.service'.
+Created symlink from /etc/systemd/system/multi-user.target.wants/nscd.service to /usr/lib/systemd/system/nscd.service.
+Created symlink from /etc/systemd/system/sockets.target.wants/nscd.socket to /usr/lib/systemd/system/nscd.socket.
+```
+Test it 
+```
+[root@amsterdam transparent_hugepage]# time nslookup milan
+Server:         169.254.169.254
+Address:        169.254.169.254#53
+
+Non-authoritative answer:
+Name:   milan.c.sebc-labs.internal
+Address: 10.142.0.6
+
+
+real    0m0.019s
+user    0m0.005s
+sys     0m0.005s
+[root@amsterdam transparent_hugepage]# time nslookup milan
+Server:         169.254.169.254
+Address:        169.254.169.254#53
+
+Non-authoritative answer:
+Name:   milan.c.sebc-labs.internal
+Address: 10.142.0.6
+
+
+real    0m0.009s
+user    0m0.004s
+sys     0m0.004s
+```
+
+
 These steps were then applied to all the hosts
