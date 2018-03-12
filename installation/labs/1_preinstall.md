@@ -84,5 +84,36 @@ tmpfs           6.3G     0  6.3G   0% /sys/fs/cgroup
 tmpfs           1.3G     0  1.3G   0% /run/user/1004
 ```
 
+## Disable Transparent Huge Page
+Check the current setting: 
+```
+[root@amsterdam transparent_hugepage]# cat /sys/kernel/mm/transparent_hugepage/defrag
+[always] madvise never
+[root@amsterdam transparent_hugepage]# cat /sys/kernel/mm/transparent_hugepage/enabled
+[always] madvise never
+
+```
+Disable Transparent Hugepage support (temporarly):
+```
+[root@amsterdam transparent_hugepage]# echo 'never' > /sys/kernel/mm/transparent_hugepage/defrag
+[root@amsterdam transparent_hugepage]# echo 'never' > /sys/kernel/mm/transparent_hugepage/enabled
+```
+Permanently apply changes
+```
+add the following line to /etc/rc.d/rc.local file
+echo never > /sys/kernel/mm/transparent_hugepage/defrag
+echo never > /sys/kernel/mm/transparent_hugepage/enabled
+```
+Modify the permissions of the rc.local file:
+```
+chmod +x /etc/rc.d/rc.local
+```
+Double check that everything is ok:
+```
+[root@amsterdam transparent_hugepage]# cat /sys/kernel/mm/transparent_hugepage/enabled
+always madvise [never]
+[root@amsterdam transparent_hugepage]# cat /sys/kernel/mm/transparent_hugepage/defrag
+always madvise [never]
+```
 
 These steps were then applied to all the hosts
