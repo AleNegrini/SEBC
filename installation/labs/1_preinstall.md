@@ -23,6 +23,44 @@ Double check the new __vm.swappiness__ value:
 1
 ```
 
+## Disable SELinux
+Disable SELinux:
+```
+[root@amsterdam cloudera] vi /etc/sysconfig/selinux
+- SELINUX=enforcing (remove this line)
++ SELINUX=disabled (add this line)
+```
+Save and reboot the machine
+
+## Disable IPv6
+```
+[root@amsterdam cloudera] vi /etc/sysctl.conf
++ net.ipv6.conf.all.disable_ipv6 = 1 (add this line)
+```
+Save and reboot the machine
+
+## Ulimits checks
+```
+[cloudera@amsterdam ~]$ ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 51398
+max locked memory       (kbytes, -l) 64
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 1024
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 8192
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 4096
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+```
+From the documentation: "Cloudera Manager will fix this issue, but if you aren’t running Cloudera Manager, be aware of this fact. Cloudera Manager will not alter users’ limits outside of Hadoop’s default limits. Nevertheless, it is still beneficial to raise the global limits to 64k."
+
 ## Checking volumes
 ```
 [root@amsterdam cloudera]# cat /etc/fstab
@@ -46,23 +84,5 @@ tmpfs           6.3G     0  6.3G   0% /sys/fs/cgroup
 tmpfs           1.3G     0  1.3G   0% /run/user/1004
 ```
 
+
 These steps were then applied to all the hosts
-
-
-## Not requested, but essentials pre-requisites 
-
-## Disable SELinux
-Disable SELinux:
-```
-[root@amsterdam cloudera] vi /etc/sysconfig/selinux
-- SELINUX=enforcing (remove this line)
-+ SELINUX=disabled (add this line)
-```
-Save and reboot the machine
-
-## Disable IPv6
-```
-[root@amsterdam cloudera] vi /etc/sysctl.conf
-+ net.ipv6.conf.all.disable_ipv6 = 1 (add this line)
-```
-Save and reboot the machine
