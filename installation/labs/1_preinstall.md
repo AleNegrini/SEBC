@@ -116,4 +116,22 @@ always madvise [never]
 always madvise [never]
 ```
 
+## Network interface configuration
+```
+[root@amsterdam transparent_hugepage]# netstat -i
+Kernel Interface table
+Iface      MTU    RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR Flg
+eth0      1460    17158      0      0 0         18683      0      0      0 BMRU
+lo       65536        0      0      0 0             0      0      0      0 LRU
+[root@amsterdam transparent_hugepage]# ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN qlen 1
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1460 qdisc mq state UP qlen 1000
+    link/ether 42:01:0a:8e:00:02 brd ff:ff:ff:ff:ff:ff
+    inet 10.142.0.2/32 brd 10.142.0.2 scope global dynamic eth0
+       valid_lft 80565sec preferred_lft 80565sec
+```
+
 These steps were then applied to all the hosts
