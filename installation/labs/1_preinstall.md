@@ -146,100 +146,40 @@ lo       65536        0      0      0 0             0      0      0      0 LRU
 ## Forward and Revers host lookups
 ### Getent command: forward and reverse lookups
 ```
-[root@amsterdam transparent_hugepage]# getent ahosts
+[cloudera@amsterdam ~]$ getent ahosts
 127.0.0.1       localhost localhost.localdomain localhost4 localhost4.localdomain4
 127.0.0.1       localhost localhost.localdomain localhost6 localhost6.localdomain6
-10.142.0.3      berlin.c.sebc-labs.internal berlin
-10.142.0.4      london.c.sebc-labs.internal london
-10.142.0.5      milan.c.sebc-labs.internal milan
-10.142.0.6      paris.c.sebc-labs.internal paris
 10.142.0.2      amsterdam.c.sebc-labs.internal amsterdam
+10.142.0.3      berlin.c.sebc-labs.internal berlin
+10.142.0.5      london.c.sebc-labs.internal london
+10.142.0.6      milan.c.sebc-labs.internal milan
+10.142.0.4      paris.c.sebc-labs.internal paris
 169.254.169.254 metadata.google.internal
-[root@amsterdam transparent_hugepage]# getent hosts berlin
-10.142.0.3      berlin.c.sebc-labs.internal berlin
-[root@amsterdam transparent_hugepage]# getent hosts berlin.c.sebc-labs.internal
-10.142.0.3      berlin.c.sebc-labs.internal berlin
-[root@amsterdam transparent_hugepage]# getent hosts milan
-10.142.0.5      milan.c.sebc-labs.internal milan
-[root@amsterdam transparent_hugepage]# getent hosts milan.c.sebc-labs.internal
-10.142.0.5      milan.c.sebc-labs.internal milan
-[root@amsterdam transparent_hugepage]# getent hosts london
-10.142.0.4      london.c.sebc-labs.internal london
-[root@amsterdam transparent_hugepage]# getent hosts london.c.sebc-labs.internal
-10.142.0.4      london.c.sebc-labs.internal london
-[root@amsterdam transparent_hugepage]# getent hosts paris
-10.142.0.6      paris.c.sebc-labs.internal paris
-[root@amsterdam transparent_hugepage]# getent hosts paris.c.sebc-labs.internal
-10.142.0.6      paris.c.sebc-labs.internal paris
-[root@amsterdam transparent_hugepage]# getent hosts amsterdam
-::1             amsterdam localhost
-[root@amsterdam transparent_hugepage]# getent hosts amsterdam.c.sebc-labs.internal
+[cloudera@amsterdam ~]$ getent hosts amsterdam.c.sebc-labs.internal
 10.142.0.2      amsterdam.c.sebc-labs.internal amsterdam
-[root@amsterdam transparent_hugepage]# getent hosts 10.142.0.3
+[cloudera@amsterdam ~]$ getent hosts milan.c.sebc-labs.internal
+10.142.0.6      milan.c.sebc-labs.internal milan
+[cloudera@amsterdam ~]$ getent hosts london.c.sebc-labs.internal
+10.142.0.5      london.c.sebc-labs.internal london
+[cloudera@amsterdam ~]$ getent hosts paris.c.sebc-labs.internal
+10.142.0.4      paris.c.sebc-labs.internal paris
+[cloudera@amsterdam ~]$ getent hosts berlin.c.sebc-labs.internal
 10.142.0.3      berlin.c.sebc-labs.internal berlin
-[root@amsterdam transparent_hugepage]# getent hosts 10.142.0.5
-10.142.0.5      milan.c.sebc-labs.internal milan
-[root@amsterdam transparent_hugepage]# getent hosts 10.142.0.4
-10.142.0.4      london.c.sebc-labs.internal london
-[root@amsterdam transparent_hugepage]# getent hosts 10.142.0.6
-10.142.0.6      paris.c.sebc-labs.internal paris
-[root@amsterdam transparent_hugepage]# getent hosts 10.142.0.2
+[cloudera@amsterdam ~]$ getent hosts 10.142.0.2
 10.142.0.2      amsterdam.c.sebc-labs.internal amsterdam
-[root@amsterdam transparent_hugepage]#
+[cloudera@amsterdam ~]$ getent hosts 10.142.0.6
+10.142.0.6      milan.c.sebc-labs.internal milan
+[cloudera@amsterdam ~]$ getent hosts 10.142.0.5
+10.142.0.5      london.c.sebc-labs.internal london
+[cloudera@amsterdam ~]$ getent hosts 10.142.0.4
+10.142.0.4      paris.c.sebc-labs.internal paris
+[cloudera@amsterdam ~]$ getent hosts 10.142.0.3
+10.142.0.3      berlin.c.sebc-labs.internal berlin
 
 ```
 ### nslookup command: forward and reverse lookup
 ```
-[root@amsterdam transparent_hugepage]# nslookup berlin.c.sebc-labs.internal
-Server:         169.254.169.254
-Address:        169.254.169.254#53
-
-Non-authoritative answer:
-Name:   berlin.c.sebc-labs.internal
-Address: 10.142.0.3
-
-[root@amsterdam transparent_hugepage]# nslookup amsterdam.c.sebc-labs.internal
-Server:         169.254.169.254
-Address:        169.254.169.254#53
-
-Non-authoritative answer:
-Name:   amsterdam.c.sebc-labs.internal
-Address: 10.142.0.2
-
-[root@amsterdam transparent_hugepage]# nslookup paris.c.sebc-labs.internal
-Server:         169.254.169.254
-Address:        169.254.169.254#53
-
-Non-authoritative answer:
-Name:   paris.c.sebc-labs.internal
-Address: 10.142.0.4
-
-[root@amsterdam transparent_hugepage]# nslookup milan.c.sebc-labs.internal
-Server:         169.254.169.254
-Address:        169.254.169.254#53
-
-Non-authoritative answer:
-Name:   milan.c.sebc-labs.internal
-Address: 10.142.0.6
-
-[root@amsterdam transparent_hugepage]# nslookup london.c.sebc-labs.internal
-Server:         169.254.169.254
-Address:        169.254.169.254#53
-
-Non-authoritative answer:
-Name:   london.c.sebc-labs.internal
-Address: 10.142.0.5
-
-[root@amsterdam transparent_hugepage]# nslookup 10.142.0.2
-Server:         169.254.169.254
-Address:        169.254.169.254#53
-
-Non-authoritative answer:
-2.0.142.10.in-addr.arpa name = amsterdam.c.sebc-labs.internal.
-
-Authoritative answers can be found from:
-
-[root@amsterdam transparent_hugepage]# nslookup 10.142.0.3
+[cloudera@amsterdam ~]$ nslookup 10.142.0.3
 Server:         169.254.169.254
 Address:        169.254.169.254#53
 
@@ -248,16 +188,16 @@ Non-authoritative answer:
 
 Authoritative answers can be found from:
 
-[root@amsterdam transparent_hugepage]# nslookup 10.142.0.4
+[cloudera@amsterdam ~]$ nslookup 10.142.0.2
 Server:         169.254.169.254
 Address:        169.254.169.254#53
 
 Non-authoritative answer:
-4.0.142.10.in-addr.arpa name = paris.c.sebc-labs.internal.
+2.0.142.10.in-addr.arpa name = amsterdam.c.sebc-labs.internal.
 
 Authoritative answers can be found from:
 
-[root@amsterdam transparent_hugepage]# nslookup 10.142.0.5
+[cloudera@amsterdam ~]$ nslookup 10.142.0.5
 Server:         169.254.169.254
 Address:        169.254.169.254#53
 
@@ -266,7 +206,7 @@ Non-authoritative answer:
 
 Authoritative answers can be found from:
 
-[root@amsterdam transparent_hugepage]# nslookup 10.142.0.6
+[cloudera@amsterdam ~]$ nslookup 10.142.0.6
 Server:         169.254.169.254
 Address:        169.254.169.254#53
 
@@ -274,6 +214,54 @@ Non-authoritative answer:
 6.0.142.10.in-addr.arpa name = milan.c.sebc-labs.internal.
 
 Authoritative answers can be found from:
+
+[cloudera@amsterdam ~]$ nslookup 10.142.0.4
+Server:         169.254.169.254
+Address:        169.254.169.254#53
+
+Non-authoritative answer:
+4.0.142.10.in-addr.arpa name = paris.c.sebc-labs.intern
+
+[cloudera@amsterdam ~]$ nslookup berlin.c.sebc-labs.internal
+Server:         169.254.169.254
+Address:        169.254.169.254#53
+
+Non-authoritative answer:
+Name:   berlin.c.sebc-labs.internal
+Address: 10.142.0.3
+
+[cloudera@amsterdam ~]$ nslookup london.c.sebc-labs.internal
+Server:         169.254.169.254
+Address:        169.254.169.254#53
+
+Non-authoritative answer:
+Name:   london.c.sebc-labs.internal
+Address: 10.142.0.5
+
+[cloudera@amsterdam ~]$ nslookup milan.c.sebc-labs.internal
+Server:         169.254.169.254
+Address:        169.254.169.254#53
+
+Non-authoritative answer:
+Name:   milan.c.sebc-labs.internal
+Address: 10.142.0.6
+
+[cloudera@amsterdam ~]$ nslookup paris.c.sebc-labs.internal
+Server:         169.254.169.254
+Address:        169.254.169.254#53
+
+Non-authoritative answer:
+Name:   paris.c.sebc-labs.internal
+Address: 10.142.0.4
+
+[cloudera@amsterdam ~]$ nslookup amsterdam.c.sebc-labs.internal
+Server:         169.254.169.254
+Address:        169.254.169.254#53
+
+Non-authoritative answer:
+Name:   amsterdam.c.sebc-labs.internal
+Address: 10.142.0.2
+
 
 ```
 
