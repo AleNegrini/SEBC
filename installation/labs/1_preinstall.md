@@ -39,6 +39,15 @@ Save and reboot the machine
 ```
 Save and reboot the machine
 
+## IPTables
+Cloudera documentation recommends to disable iptables. 
+In my cluster iptables feature is not installed: 
+```
+[root@amsterdam transparent_hugepage]# service iptables status
+Redirecting to /bin/systemctl status iptables.service
+Unit iptables.service could not be found.
+```
+
 ## Ulimits checks
 ```
 [cloudera@amsterdam ~]$ ulimit -a
