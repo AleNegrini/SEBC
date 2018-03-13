@@ -14,7 +14,7 @@ do
    for j in 4 6 8 
    do                 
       # Container memory
-      for k in 512 
+      for k in 1024 
       do                         
          # Set mapper JVM heap 
          MAP_MB=`echo "($k*0.8)/1" | bc` 
