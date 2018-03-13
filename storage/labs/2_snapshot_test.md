@@ -52,4 +52,17 @@ Let's delete the file contained in:
 [hdfs@milan tmp]$
 ```
 
-## 
+## Restore from a database
+I restored the snapshot from the Cloudera Manager UI:
+```
+HDFS -> File Browser -> select 'precious' -> on the arrow in the top right corner, click "Restore Directory From Snapshot " -> select the "sebc-hdfs-test" snapshot -> selected "copy" option for the restoring -> Click on "restore" button
+```
+Double check that the file has been correctly restored
+```
+[hdfs@milan tmp]$ hdfs dfs -ls /precious
+Found 1 items
+-rw-r--r--   3 hdfs supergroup    1385720 2018-03-13 12:35 /precious/SEBC.zip
+[hdfs@milan tmp]$
+```
+
+Please note that the time at which file has been written is different from the previous one (before the deletion)
