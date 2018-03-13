@@ -36,3 +36,20 @@ I took the snapshot from the Cloudera Manager UI, following these following step
 HDFS -> File Browser -> select 'precious' -> on the arrow in the top right corner, click "Take Snapshot" -> give it "sebc-hdfs-test" name
 ```
 
+## Delete directory/file
+```
+[hdfs@milan tmp]$ hdfs dfs -rm -r /precious
+rm: Failed to move to trash: hdfs://amsterdam.c.sebc-labs.internal:8020/precious: The directory /precious cannot be deleted since /precious is snapshottable and already has snapshots
+```
+A snapshottable folder cannot be deleted
+
+Let's delete the file contained in:
+```
+[hdfs@milan tmp]$ hdfs dfs -rm -r /precious/SEBC.zip
+18/03/13 12:29:32 INFO fs.TrashPolicyDefault: Moved: 'hdfs://amsterdam.c.sebc-labs.internal:8020/precious/SEBC.zip' to trash at: hdfs://amsterdam.c.sebc-labs.internal:8020/user/hdfs/.Trash/Current/precious/SEBC.zip
+[hdfs@milan tmp]$ hdfs dfs -ls /precious 
+(empty set as expected)
+[hdfs@milan tmp]$
+```
+
+## 
