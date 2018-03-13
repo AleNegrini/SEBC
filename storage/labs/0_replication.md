@@ -332,3 +332,92 @@ Let's try to transfer data within the same cluster:
                 BYTESEXPECTED=524288000
                 COPY=5
 ```
+Double check the copied files
+```
+[hdfs@london cloudera]$ hdfs dfs -ls /user/AleNegrini_copied
+Found 4 items
+-rw-r--r--   3 hdfs supergroup          0 2018-03-13 10:52 /user/AleNegrini_copied/_SUCCESS
+-rw-r--r--   3 hdfs supergroup  174762700 2018-03-13 10:52 /user/AleNegrini_copied/part-m-00000
+-rw-r--r--   3 hdfs supergroup  174762700 2018-03-13 10:52 /user/AleNegrini_copied/part-m-00001
+-rw-r--r--   3 hdfs supergroup  174762600 2018-03-13 10:52 /user/AleNegrini_copied/part-m-00002
+```
+
+## Checking folders
+
+Since the teragen was launched with REP=1 option, when I launched __fsck__ command I got: 
+```
+[hdfs@london cloudera]$ hdfs fsck /AleNegrini -files -blocks
+Connecting to namenode via http://amsterdam.c.sebc-labs.internal:50070
+FSCK started by hdfs (auth:SIMPLE) from /10.142.0.5 for path /AleNegrini at Tue Mar 13 10:55:57 UTC 2018
+/AleNegrini <dir>
+/AleNegrini/_SUCCESS 0 bytes, 0 block(s):  OK
+
+/AleNegrini/part-m-00000 174762700 bytes, 2 block(s):  OK
+0. BP-1004015303-10.142.0.2-1520874104410:blk_1073743509_2685 len=134217728 Live_repl=1
+1. BP-1004015303-10.142.0.2-1520874104410:blk_1073743510_2686 len=40544972 Live_repl=1
+
+/AleNegrini/part-m-00001 174762700 bytes, 2 block(s):  OK
+0. BP-1004015303-10.142.0.2-1520874104410:blk_1073743512_2688 len=134217728 Live_repl=1
+1. BP-1004015303-10.142.0.2-1520874104410:blk_1073743516_2692 len=40544972 Live_repl=1
+
+/AleNegrini/part-m-00002 174762600 bytes, 2 block(s):  OK
+0. BP-1004015303-10.142.0.2-1520874104410:blk_1073743513_2689 len=134217728 Live_repl=1
+1. BP-1004015303-10.142.0.2-1520874104410:blk_1073743515_2691 len=40544872 Live_repl=1
+
+Status: HEALTHY
+ Total size:    524288000 B
+ Total dirs:    1
+ Total files:   4
+ Total symlinks:                0
+ Total blocks (validated):      6 (avg. block size 87381333 B)
+ Minimally replicated blocks:   6 (100.0 %)
+ Over-replicated blocks:        0 (0.0 %)
+ Under-replicated blocks:       0 (0.0 %)
+ Mis-replicated blocks:         0 (0.0 %)
+ Default replication factor:    3
+ Average block replication:     1.0
+ Corrupt blocks:                0
+ Missing replicas:              0 (0.0 %)
+ Number of data-nodes:          3
+ Number of racks:               1
+FSCK ended at Tue Mar 13 10:55:57 UTC 2018 in 1 milliseconds
+```
+
+If instead, I try to check the copied files, I got a replication factor of 3: 
+```
+[hdfs@london cloudera]$ hdfs fsck /user/AleNegrini_copied -files -blocks
+Connecting to namenode via http://amsterdam.c.sebc-labs.internal:50070
+FSCK started by hdfs (auth:SIMPLE) from /10.142.0.5 for path /user/AleNegrini_copied at Tue Mar 13 10:55:40 UTC 2018
+/user/AleNegrini_copied <dir>
+/user/AleNegrini_copied/_SUCCESS 0 bytes, 0 block(s):  OK
+
+/user/AleNegrini_copied/part-m-00000 174762700 bytes, 2 block(s):  OK
+0. BP-1004015303-10.142.0.2-1520874104410:blk_1073743960_3136 len=134217728 Live_repl=3
+1. BP-1004015303-10.142.0.2-1520874104410:blk_1073743961_3137 len=40544972 Live_repl=3
+
+/user/AleNegrini_copied/part-m-00001 174762700 bytes, 2 block(s):  OK
+0. BP-1004015303-10.142.0.2-1520874104410:blk_1073743955_3131 len=134217728 Live_repl=3
+1. BP-1004015303-10.142.0.2-1520874104410:blk_1073743958_3134 len=40544972 Live_repl=3
+
+/user/AleNegrini_copied/part-m-00002 174762600 bytes, 2 block(s):  OK
+0. BP-1004015303-10.142.0.2-1520874104410:blk_1073743954_3130 len=134217728 Live_repl=3
+1. BP-1004015303-10.142.0.2-1520874104410:blk_1073743957_3133 len=40544872 Live_repl=3
+
+Status: HEALTHY
+ Total size:    524288000 B
+ Total dirs:    1
+ Total files:   4
+ Total symlinks:                0
+ Total blocks (validated):      6 (avg. block size 87381333 B)
+ Minimally replicated blocks:   6 (100.0 %)
+ Over-replicated blocks:        0 (0.0 %)
+ Under-replicated blocks:       0 (0.0 %)
+ Mis-replicated blocks:         0 (0.0 %)
+ Default replication factor:    3
+ Average block replication:     3.0
+ Corrupt blocks:                0
+ Missing replicas:              0 (0.0 %)
+ Number of data-nodes:          3
+ Number of racks:               1
+FSCK ended at Tue Mar 13 10:55:40 UTC 2018 in 4 milliseconds
+```
