@@ -1,5 +1,6 @@
 # Snapshot feature
 
+## HDFS folder creation 
 Create __precious__ folder in HDFS:
 ```
 [root@milan cloudera]# sudo su hdfs
@@ -20,4 +21,11 @@ Add the ZIP folder course to HDFS folder
 [hdfs@milan tmp]$ hdfs dfs -ls /precious
 Found 1 items
 -rw-r--r--   3 hdfs supergroup    1385720 2018-03-13 12:10 /precious/SEBC.zip
+```
+
+## Snapshot enablement
+
+I enabled the snapshot for __precious__ from Cloudera Manager, following these following steps:
+```
+HDFS -> File Browser -> select 'precious' -> on the arrow in the top right corner, click "Enable Snapshot"
 ```
