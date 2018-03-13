@@ -25,7 +25,14 @@ Found 1 items
 
 ## Snapshot enablement
 
-I enabled the snapshot for __precious__ from Cloudera Manager, following these following steps:
+I enabled the snapshot for __precious__ from Cloudera Manager UI, following these following steps:
 ```
 HDFS -> File Browser -> select 'precious' -> on the arrow in the top right corner, click "Enable Snapshot"
 ```
+
+## Take Snapshot 
+I took the snapshot from the Cloudera Manager UI, following these following steps:
+```
+HDFS -> File Browser -> select 'precious' -> on the arrow in the top right corner, click "Take Snapshot" -> give it "sebc-hdfs-test" name
+```
+
