@@ -890,5 +890,3 @@ Result obtained:
   }
 }
 ```
-
-## Hive API: stop, start and check the current state
