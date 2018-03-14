@@ -37,7 +37,7 @@ v14
 
 * Stop Hive Service:
 ```
-[root@amsterdam cloudera-scm-server]# curl -X POST -u AleNegrini:cloudera -w "\n" http://localhost:7180/api/v2/clusters/AleNegrini/services/hive/commands/stop
+[root@amsterdam cloudera-scm-server]# curl -X POST -u AleNegrini:cloudera -w "\n" http://localhost:7180/api/v14/clusters/AleNegrini/services/hive/commands/stop
 {
   "id" : 542,
   "name" : "Stop",
