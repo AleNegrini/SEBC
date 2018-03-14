@@ -9,3 +9,8 @@ Via search bar you can also get access to ubertask configuration settings, like:
 * mapreduce.job.ubertask.maxreduces
 * mapreduce.job.ubertask.maxbytes 
 that define what "small" mean. 
+
+## Where in CM is the Kerberos Security Realm value displayed?
+Administration -> Settings -> Kerberos -> Kerberos Security Realm. 
+The default one is HADOOP.COM
+
