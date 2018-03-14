@@ -1,3 +1,8 @@
+```
+[root@amsterdam cloudera-scm-server]# curl u AleNegrini:cloudera 'http://localhost:7180/api/version'                                          
+v14
+```
+
 ## Hive API: stop, start and check the current state
 * Check the current status of Hive Service (before stopping it): 
 ```
