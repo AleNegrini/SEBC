@@ -27,3 +27,8 @@ By tiping on the search bar "Kerberos Principal", you can get all the services h
 
 ## Give the tsquery statement used to chart Hue's CPU utilization
 SELECT cpu_system_rate + cpu_user_rate WHERE entityName = "hue-HUE_SERVER-d13cf07e51c6ba1367cb6597c9a8deb6" AND category = ROLE
+
+## Name all the roles that make up the Hive service
+* Gateway
+* Hive Metastore Server
+* HiveServer2
