@@ -29,7 +29,7 @@ for the entire challenge.
 
 My second node will be: 
 ```
-10.142.0.2      berlin.c.sebc-pre-challenges.internal berlin
+10.142.0.6      berlin.c.sebc-pre-challenges.internal berlin
 ```
 for the entire challenge. 
 
